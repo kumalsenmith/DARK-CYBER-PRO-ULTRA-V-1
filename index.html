@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DARK CYBER PRO ULTRA V3.1 — Local Cyber Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body data-theme="red">
+<div id="bootScreen" aria-label="Application startup"><div class="boot-logo">DARK CYBER <span>PRO ULTRA</span></div><div class="boot-sub">INITIALIZING LOCAL SIMULATION</div><div class="boot-track"><i id="bootProgress"></i></div><div id="bootStatus">LOADING INTERFACE MODULES...</div></div>
+<canvas id="bg"></canvas>
+<div id="auth" class="screen"><div class="card auth-card">
+<div class="logo">DARK CYBER PRO</div><p class="sub" style="text-align:center">ULTIMATE HACKER SIMULATOR // <b>100% FICTIONAL</b></p>
+<div class="tabs"><button class="tab active" data-tab="login" type="button">LOGIN</button><button class="tab" data-tab="reg" type="button">REGISTER</button></div>
+<form id="loginForm"><input id="lu" placeholder="Username" autocomplete="username"><input id="lp" type="password" placeholder="Password" autocomplete="current-password"><button class="btn" type="submit">ENTER SYSTEM</button><button class="btn ghost" id="demo" type="button">USE DEMO (admin / dark123)</button></form>
+<form id="regForm" class="hidden"><input id="ru" placeholder="New username"><input id="rp" type="password" placeholder="Password (min 4)"><input id="rp2" type="password" placeholder="Confirm password"><button class="btn" type="submit">CREATE LOCAL ACCOUNT</button></form>
+<div id="authMsg"></div><p class="sub" style="text-align:center">Accounts are stored only in this browser. Demo toy — not real security.</p>
+</div></div>
+<div id="trans" class="hidden"><div id="ttxt"></div><div class="tb"><i id="tbar"></i></div></div>
+<div id="flash" class="hidden" onclick="this.classList.add('hidden')"><b>ACCESS GRANTED</b><p class="sub">SIMULATED — no real system was touched. Click to close.</p></div>
+<div id="app" class="hidden">
+<aside id="side"><div class="brand">DARK<span>CYBER</span></div>
+<nav id="nav"><button data-v="dash" class="active">▣ DASHBOARD</button><button data-v="scan">◎ IP SCANNER</button><button data-v="pass">✱ PASSWORD ANALYSIS</button><button data-v="fw">▤ FIREWALL TEST</button><button data-v="dec">⌬ DECRYPTION</button><button data-v="mat">▥ MATRIX GENERATOR</button><button data-v="sec">◈ SECURITY BOARD</button><button data-v="acc">⚡ SYSTEM ACCESS</button><button data-v="term">&gt;_ TERMINAL</button>
+<button data-v="globe">◎ 3D CYBER GLOBE</button>
+<button data-v="studio">⌘ CODE STUDIO</button>
+<button data-v="missions">★ MISSIONS & LEVELS</button>
+<button data-v="custom">⚙ CUSTOMIZATION</button>
+<button data-v="radar">◉ ADVANCED 3D RADAR</button><button data-v="analytics">▥ SECURITY ANALYTICS</button>
+<button data-v="command">&gt; COMMAND CENTER</button><button data-v="profile">◎ PROFILE EDITOR</button><button data-v="audio">♫ SOUND VISUALIZER</button>
+<button data-v="advanced">▦ ADVANCED DASHBOARD</button><button data-v="holo">◇ HOLOGRAPHIC UI</button>
+<button data-v="academy">⌂ CYBER ACADEMY</button><button data-v="filelab">▤ FILE SECURITY LAB</button>
+<button data-v="passwordlab">✧ PASSWORD CHECKER</button><button data-v="history">◷ ACTIVITY HISTORY</button>
+<button data-v="backup">⇧ BACKUP & RESTORE</button><button data-v="plugins">▣ PLUGIN SYSTEM</button></nav>
+<button id="logout">⏻ LOGOUT</button></aside>
+<main><header><button id="menuBtn">☰</button><div id="who"></div><div id="clock">00:00:00</div><button id="themeBtn">THEME</button></header>
+<div id="views">
+<section id="v-dash" class="view active"><h1>WELCOME, <span id="op"></span></h1><p class="sub">Every number and log on this screen is <b>SIMULATED</b>.</p>
+<div class="grid4">
+<div class="card stat"><small>CPU LOAD</small><b id="s-cpu">0%</b><div class="bar"><i id="sb-cpu"></i></div></div>
+<div class="card stat"><small>MEMORY</small><b id="s-mem">0%</b><div class="bar"><i id="sb-mem"></i></div></div>
+<div class="card stat"><small>NETWORK</small><b id="s-net">0</b><div class="bar"><i id="sb-net"></i></div></div>
+<div class="card stat"><small>THREAT (FAKE)</small><b id="s-thr">0%</b><div class="bar"><i id="sb-thr"></i></div></div></div>
+<div class="grid2"><div class="card"><h3>NETWORK ACTIVITY [SIMULATED]</h3><canvas id="net" width="600" height="160"></canvas></div>
+<div class="card"><h3>SCAN PROGRESS</h3><div class="bar"><i id="p-dash"></i></div><p id="t-dash" class="sub">Idle.</p><button class="btn" id="b-dash">RUN SIMULATED SCAN</button></div></div>
+<div class="grid2"><div class="card"><h3>LIVE TERMINAL</h3><pre class="out" id="mini"></pre></div>
+<div class="card"><h3>ACTIVITY LOG</h3><ul id="log"></ul><button class="btn ghost" id="b-clog">CLEAR LOG</button></div></div></section>
+<section id="v-pass" class="view"><h2>FAKE PASSWORD ANALYSIS</h2><p class="sub">Type any sample text. It is analysed locally for show; nothing is cracked, stored or sent. Time estimates are <b>SIMULATED</b>.</p>
+<div class="card"><input id="i-pass" placeholder="Sample password..."><button class="btn" id="b-pass">ANALYZE</button><div class="bar"><i id="p-pass"></i></div><div class="bar"><i id="m-pass"></i></div><pre class="out" id="o-pass">Strength meter is the lower bar.</pre></div></section>
+<section id="v-mat" class="view"><h2>MATRIX CODE GENERATOR</h2><p class="sub">Endless random glyphs. Purely decorative.</p>
+<div class="card"><button class="btn" id="b-mat">START GENERATOR</button> <button class="btn ghost" id="b-cmat">CLEAR</button><input id="r-mat" type="range" min="30" max="400" value="250"><pre class="out" id="o-mat"></pre></div></section>
+<section id="v-sec" class="view"><h2>CYBER SECURITY DASHBOARD</h2><p class="sub">Randomly generated fictional metrics — not a real audit.</p><div class="grid4" id="gauges"></div><div class="card"><h3>FICTIONAL THREAT FEED</h3><ul id="threats"></ul></div><br><button class="btn" id="b-sec">REFRESH METRICS</button></section>
+<section id="v-term" class="view"><h2>TERMINAL</h2><p class="sub">Local fictional shell. Type <b>help</b>. Use ↑ ↓ for history.</p><div id="tout"></div><form id="tf"><span>operator@darkcyber:~$</span><input id="ti" autocomplete="off" spellcheck="false"></form></section>
+
+<section id="v-globe" class="view">
+<h2>3D CYBER GLOBE</h2>
+<p class="sub">Animated globe with randomly generated fictional signal points. No GPS, location tracking or network data is used.</p>
+<div class="globe-layout">
+ <div class="card globe-card">
+  <div class="globe-status"><span id="globeState">SIMULATION READY</span><span>LOCAL VISUAL MODEL</span></div>
+  <canvas id="globeCanvas" width="760" height="560" aria-label="Animated fictional cyber globe"></canvas>
+  <div class="globe-actions"><button class="btn" id="globeToggle">PAUSE ROTATION</button><button class="btn ghost" id="globeRefresh">REGENERATE SIGNALS</button></div>
+ </div>
+ <div class="card"><h3>FICTIONAL SIGNALS</h3><div class="globe-stats"><div><small>VISIBLE NODES</small><b id="globeNodes">12</b></div><div><small>MODEL SPEED</small><b id="globeSpeed">1.0x</b></div></div><ul id="globeFeed"></ul><p class="sub">All dots and labels are generated locally for visual effect.</p></div>
+</div>
+</section>
+<section id="v-studio" class="view">
+<h2>ADVANCED CODE STUDIO</h2>
+<p class="sub">Edit HTML, CSS and JavaScript in a local sandbox preview. The preview has no network access and cannot access this app or your PC files.</p>
+<div class="studio-toolbar"><label for="studioTemplate">STARTER TEMPLATE</label><select id="studioTemplate"><option value="starter">Cyber landing page</option><option value="card">Profile card</option><option value="counter">Interactive counter</option></select><button class="btn" id="studioRun">RUN SANDBOX PREVIEW</button><button class="btn ghost" id="studioReset">RESET TEMPLATE</button></div>
+<div class="studio-grid">
+ <div class="card editor-card"><h3>HTML</h3><textarea id="studioHTML" spellcheck="false" aria-label="HTML editor"></textarea></div>
+ <div class="card editor-card"><h3>CSS</h3><textarea id="studioCSS" spellcheck="false" aria-label="CSS editor"></textarea></div>
+ <div class="card editor-card"><h3>JAVASCRIPT</h3><textarea id="studioJS" spellcheck="false" aria-label="JavaScript editor"></textarea></div>
+</div>
+<div class="card preview-card"><div class="preview-head"><h3>LIVE PREVIEW</h3><span id="studioStatus">READY</span></div><iframe id="studioPreview" title="Code Studio sandbox preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div>
+</section>
+<section id="v-missions" class="view">
+<h2>MISSIONS & LEVEL SYSTEM</h2>
+<p class="sub">Complete app activities to earn local XP, unlock ranks and collect achievements. Progress is saved in this browser only.</p>
+<div class="grid4">
+ <div class="card stat"><small>OPERATOR LEVEL</small><b id="operatorLevel">LEVEL 1</b><div class="bar"><i id="levelBar"></i></div><small id="xpLabel">0 / 100 XP</small></div>
+ <div class="card stat"><small>TOTAL XP</small><b id="totalXP">0</b><small>LOCAL PROGRESS</small></div>
+ <div class="card stat"><small>MISSIONS DONE</small><b id="missionsDone">0 / 6</b><small>COMPLETED TASKS</small></div>
+ <div class="card stat"><small>OPERATOR RANK</small><b id="operatorRank">ROOKIE</b><small id="rankCaption">Starting rank</small></div>
+</div>
+<div class="grid2"><div class="card"><h3>AVAILABLE MISSIONS</h3><div id="missionList" class="mission-list"></div></div><div class="card"><h3>ACHIEVEMENTS</h3><div id="achievementList" class="achievement-list"></div></div></div>
+<button class="btn ghost" id="resetProgress">RESET LOCAL PROGRESS</button>
+</section>
+<section id="v-custom" class="view">
+<h2>CUSTOMIZATION CENTER</h2>
+<p class="sub">Personalize the interface. Settings are stored locally in this browser.</p>
+<div class="grid2">
+ <div class="card settings-card"><h3>COLOR THEMES</h3><label for="themeSelect">Interface theme</label><select id="themeSelect"><option value="red">Cyber Red</option><option value="purple">Neon Purple</option><option value="cyan">Electric Cyan</option><option value="green">Matrix Green</option></select>
+ <h3>VISUAL EFFECTS</h3><label class="setting-row"><span>Matrix background animation</span><input id="matrixToggle" type="checkbox" checked></label>
+ <label class="setting-row"><span>Glow effects</span><input id="glowToggle" type="checkbox" checked></label>
+ <label class="setting-row"><span>Reduced motion</span><input id="motionToggle" type="checkbox"></label>
+ </div>
+ <div class="card settings-card"><h3>INTERFACE OPTIONS</h3><label for="densitySelect">Dashboard density</label><select id="densitySelect"><option value="normal">Normal</option><option value="compact">Compact</option></select>
+ <label for="fontSelect">Interface font</label><select id="fontSelect"><option value="system">System</option><option value="mono">Monospace</option></select>
+ <p class="sub">Your changes apply immediately and remain after closing the browser.</p>
+ <button class="btn" id="saveSettings">SAVE SETTINGS</button><button class="btn ghost" id="resetSettings">RESTORE DEFAULTS</button><p id="settingsStatus" class="sub" aria-live="polite"></p></div>
+</div>
+</section>
+
+<section id="v-radar" class="view"><h2>ADVANCED 3D RADAR</h2><p class="sub">Animated fictional radar display. Dots are randomly generated locally; no real devices or locations are detected.</p><div class="grid2"><div class="card radar-card"><canvas id="radarCanvas" width="700" height="500"></canvas><div class="radar-actions"><button class="btn" id="radarToggle">PAUSE RADAR</button><button class="btn ghost" id="radarRefresh">REFRESH FICTIONAL CONTACTS</button></div></div><div class="card"><h3>SIMULATED CONTACTS</h3><div class="grid4"><div class="stat"><small>CONTACTS</small><b id="radarCount">8</b></div><div class="stat"><small>SWEEP</small><b id="radarState">ACTIVE</b></div></div><ul id="radarFeed"></ul><p class="sub">All contact IDs and signal strengths are decorative demo values.</p></div></div></section>
+<section id="v-analytics" class="view"><h2>SECURITY ANALYTICS</h2><p class="sub">A dashboard built from real activity inside this app, saved locally in this browser. It is not a device security audit.</p><div class="grid4"><div class="card stat"><small>EVENTS TODAY</small><b id="anEvents">128</b></div><div class="card stat"><small>LOCAL ALERT EVENTS</small><b id="anAlerts">07</b></div><div class="card stat"><small>LOCAL ALERT SCORE</small><b id="anScore">96%</b></div><div class="card stat"><small>SESSION TIME</small><b id="anUptime">99.9%</b></div></div><div class="grid2"><div class="card"><h3>EVENT ACTIVITY</h3><canvas id="analyticsChart" width="700" height="260"></canvas></div><div class="card"><h3>EVENT BREAKDOWN</h3><div id="analyticsBreakdown"></div><button class="btn" id="analyticsRefresh">REFRESH LOCAL REPORT</button></div></div><p id="analyticsStamp" class="sub">Report not yet refreshed.</p></section>
+<section id="v-command" class="view"><h2>COMMAND CENTER</h2><p class="sub">Safe built-in commands only. This is not a Windows shell and cannot run system commands.</p><div class="card"><div class="command-shortcuts"><button class="btn ghost" data-command="help">HELP</button><button class="btn ghost" data-command="status">STATUS</button><button class="btn ghost" data-command="radar">RADAR</button><button class="btn ghost" data-command="analytics">ANALYTICS</button><button class="btn ghost" data-command="profile">PROFILE</button><button class="btn ghost" data-command="clear">CLEAR</button></div><div id="commandOutput" class="command-output" aria-live="polite">DARK CYBER COMMAND CENTER // LOCAL DEMO
+Type help to list available commands.</div><form id="commandForm"><span>darkcyber&gt;</span><input id="commandInput" autocomplete="off" spellcheck="false" placeholder="Type help..."></form></div></section>
+<section id="v-profile" class="view"><h2>PROFILE EDITOR</h2><p class="sub">Edit a local demo operator profile. Information stays in this browser only.</p><div class="grid2"><div class="card profile-form"><div class="profile-avatar" id="profileAvatar">DC</div><label for="profileName">Display name</label><input id="profileName" maxlength="24" placeholder="Operator name"><label for="profileRole">Role</label><select id="profileRole"><option>Cyber Explorer</option><option>Code Creator</option><option>Security Analyst</option><option>UI Designer</option></select><label for="profileBio">Bio</label><textarea id="profileBio" maxlength="160" placeholder="Write a short profile bio..."></textarea><label for="profileColor">Avatar accent</label><select id="profileColor"><option value="cyan">Electric Cyan</option><option value="red">Cyber Red</option><option value="purple">Neon Purple</option><option value="green">Matrix Green</option></select><button class="btn" id="profileSave">SAVE PROFILE</button><p id="profileStatus" class="sub" aria-live="polite"></p></div><div class="card"><h3>PROFILE PREVIEW</h3><div class="profile-preview"><div class="profile-avatar" id="profilePreviewAvatar">DC</div><h2 id="profilePreviewName">Operator</h2><p id="profilePreviewRole" class="sub">Cyber Explorer</p><p id="profilePreviewBio">Your profile bio appears here.</p></div></div></div></section>
+<section id="v-audio" class="view"><h2>SOUND VISUALIZER</h2><p class="sub">A live frequency visualizer for the generated audio tone. No microphone is accessed or recorded.</p><div class="card audio-card"><div class="audio-display"><canvas id="audioCanvas" width="900" height="300"></canvas></div><div class="audio-controls"><button class="btn" id="audioStart">START DEMO AUDIO</button><button class="btn ghost" id="audioStop">STOP</button><label for="audioVolume">VOLUME</label><input id="audioVolume" type="range" min="0" max="35" value="12"></div><p id="audioStatus" class="sub">Audio is stopped. Press START to enable the optional generated tone.</p></div></section>
+</div></main></div>
+<script src="app.js"></script></body></html>

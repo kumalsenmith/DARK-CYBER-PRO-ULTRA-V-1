@@ -1,0 +1,30 @@
+DARK CYBER PRO ULTRA - Python EXE Build
+=======================================
+
+වැදගත්:
+- මේ project එකේ dashboard UI එක පරණ HTML/CSS/JavaScript files වලම තියෙනවා.
+- Python + pywebview මඟින් Windows desktop window එකක් ලබාදෙනවා.
+- PyInstaller මඟින් ඒ Python desktop launcher එක EXE එකක් කරනවා.
+- මෙය JavaScript code එක Python බවට පරිවර්තනය කිරීමක් නොවේ.
+- මෙහි scanner/firewall වැනි demo අංග තිබේ නම් ඒවා simulator අංග ලෙසම පවතී.
+
+පියවර:
+1. Python 3.10 - 3.13 install කරන්න:
+   https://www.python.org/downloads/
+   Install කරන විට "Add Python to PATH" තෝරන්න.
+2. මේ folder එකේ build.bat double-click කරන්න.
+3. පළමු වරට internet හරහා Python packages install වේ.
+4. Build සාර්ථක නම් dist folder එකේ
+   BLACK_HAT_CYBER_OPS.exe ලැබේ.
+
+build.bat එක අවසානයේ pause කරන නිසා error එකක් ආවත්
+Command Window එක වහාම close වෙන්නේ නැහැ.
+
+අවශ්‍යතාව:
+- Windows 10/11 64-bit
+- Python 3.10 - 3.13 (build කරන PC එකට පමණයි)
+- Microsoft Edge WebView2 Runtime (run කරන PC එකට)
+- Package install / build කරන විට internet connection
+
+දෝෂයක් ආවොත් Command Window එකේ අන්තිම error lines වල screenshot
+එකක් ලබාගන්න.
